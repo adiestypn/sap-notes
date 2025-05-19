@@ -42,7 +42,7 @@ function NoteListPage() {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Cari catatan berdasarkan judul..."
+          placeholder="Cari berdasarkan judul..."
           value={keyword}
           onChange={handleSearchChange}
         />
@@ -55,8 +55,12 @@ function NoteListPage() {
 
       {/* ➕ Tombol Tambah */}
       <div className="homepage__action">
-        <button className="action" onClick={() => navigate('/tambah')}><FiPlus /></button>
+        <button className="action tooltip" onClick={() => navigate('/tambah')}>
+            <FiPlus />
+            <span className="tooltip-text">Tambah</span>
+        </button>
       </div>
+
     </main>
   );
 }

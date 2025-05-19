@@ -24,12 +24,8 @@ function DetailPage() {
         } else {
             archiveNote(id);
         }
-
-        // ✅ Selalu kembali ke halaman utama
         navigate('/');
         };
-
-
 
   return (
     <main className="detail-page">
@@ -37,14 +33,18 @@ function DetailPage() {
       <p className="detail-page__createdAt">{showFormattedDate(note.createdAt)}</p>
       <div className="detail-page__body">{note.body}</div>
 
-      <div className="detail-page__action">
-        <button className="button" onClick={handleArchive}>
-          {note.archived ? <FiInbox /> : <FiArchive />}
+     <div className="detail-page__action">
+        <button className="action tooltip" onClick={handleArchive}>
+            {note.archived ? <FiInbox /> : <FiArchive />}
+            <span className="tooltip-text">{note.archived ? 'Pindahkan' : 'Arsipkan'}</span>
         </button>
-        <button className="button" onClick={handleDelete}>
-          <FiTrash2 />
+        <button className="action tooltip" onClick={handleDelete}>
+            <FiTrash2 />
+            <span className="tooltip-text">Hapus</span>
         </button>
-      </div>
+    </div>
+
+
     </main>
   );
 }

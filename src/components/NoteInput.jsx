@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiCheck, FiPlus } from 'react-icons/fi';
+import { FiCheck, FiPlus} from 'react-icons/fi';
 
 class NoteInput extends React.Component {
   constructor(props) {
@@ -35,28 +35,37 @@ class NoteInput extends React.Component {
 
   render() {
     return (
-      <form className='note-input' onSubmit={this.onSubmitEventHandler}>
-        {/* Sisa karakter */}
-        <p className="note-input__title__char-limit">
-          Sisa karakter: {50 - this.state.title.length}
-        </p>
-        
-        <input
-          type="text"
-          placeholder="Judul"
-          value={this.state.title}
-          onChange={this.onTitleChangeEventHandler}
-        />
-        <textarea
-          placeholder="Isi catatan..."
-          value={this.state.body}
-          onChange={this.onBodyChangeEventHandler}
-        ></textarea>
-        <button type="submit" className="icon-button" title="Tambah Catatan">
-          <FiCheck />
-        </button>
+      <>
+        <form
+          id="note-form"
+          className="note-input"
+          onSubmit={this.onSubmitEventHandler}
+        >
+          <input
+            type="text"
+            placeholder="Judul"
+            value={this.state.title}
+            onChange={this.onTitleChangeEventHandler}
+          />
+          <textarea
+            placeholder="Isi catatan..."
+            value={this.state.body}
+            onChange={this.onBodyChangeEventHandler}
+          ></textarea>
+        </form>
 
-      </form>
+        {/* Tombol simpan mengambang */}
+        <div className="add-new-page__action">
+          <button
+            type="submit"
+            form="note-form"
+            className="action tooltip"
+          >
+            <FiCheck />
+            <span className="tooltip-text">Simpan</span>
+          </button>
+        </div>
+      </>
     );
   }
 }

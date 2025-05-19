@@ -66,7 +66,7 @@ header {
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 50px;
 }
 
 nav a {
@@ -100,14 +100,14 @@ main {
 }
 
 .note-item {
-  padding: 16px;
+  padding: 8px 16px 16px 16px;
   border-radius: 8px;
   border: 1px solid var(--on-background);
   border-top: 5px solid;
 }
 
 .note-item__title {
-  margin: 4px 0;
+  margin: 0 0 4px 0;
 }
 
 .note-item__createdAt {
@@ -161,7 +161,7 @@ main {
   background-color: transparent;
   color: var(--on-background);
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: 50px;
 }
 
 .note-input button {
@@ -176,7 +176,7 @@ main {
 }
 
 .search-bar {
-  margin-top: 16px;
+  margin-top: 4px;
 }
 
 .search-bar input {
@@ -222,6 +222,15 @@ main {
   z-index: 100;
 }
 
+.add-new-page__action {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  gap: 16px;
+  z-index: 100;
+}
+
 .action {
   width: 56px;
   height: 56px;
@@ -235,17 +244,88 @@ main {
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.3s ease;
 }
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: var(--on-background);
+  color: var(--background);
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 12px;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 101;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 .action:hover {
   background-color: var(--primary-variant);
   transform: scale(1.05);
 }
 
-.detail-page__action {
-  margin-top: 32px;
-  display: flex;
-  gap: 12px;
+.detail-page {
+  max-width: 1000px;      /* Atur lebar maksimum */
+  margin: 0 auto;        /* Center horizontal */
+  padding: 32px 24px;    /* Jarak isi ke pinggir */
 }
+
+.detail-page__title {
+  font-size: 64px;       /* Ubah ini ke lebih besar dari sebelumnya */
+  font-weight: 800;      /* Lebih tebal */
+  line-height: 1.2;
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+
+.detail-page__action {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  gap: 16px;
+  z-index: 100;
+}
+
+.detail-page__createdAt {
+  color: var(--on-background-grey);
+  font-size: 20px;
+  font-style: normal;
+  margin-bottom: 20px;
+}
+
+
+.bold-underline {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.nav-link {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 16px;
+  color: var(--on-background);
+}
+
+.nav-link--lg {
+  font-size: 24px; 
+  font-weight: normal;
+}
+
+
 

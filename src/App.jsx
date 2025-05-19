@@ -12,10 +12,13 @@ function App() {
       {/* ✅ HEADER UMUM */}
       <header>
         <h1>
-          <Link to="/" className="app-title-link">Aplikasi Catatan</Link>
+        <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
         </h1>
         <nav>
-              <Link to="/arsip" style={{ marginLeft: '16px' }}>Arsip</Link></nav>
+              <Link to="/arsip" className="nav-link nav-link--lg">
+              Arsip
+              </Link>
+        </nav>
       </header>
 
       {/* ✅ HALAMAN UTAMA */}

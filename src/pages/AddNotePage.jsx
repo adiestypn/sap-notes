@@ -13,7 +13,6 @@ function AddNotePage() {
 
   return (
     <main>
-      <h2>Tambah Catatan</h2>
       <NoteInput addNote={handleAddNote} />
     </main>
   );
