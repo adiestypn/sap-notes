@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import { getAllNotes, deleteNote, archiveNote, unarchiveNote, getNote } from '../utils/local-data';
@@ -6,9 +7,10 @@ import { FiPlus } from 'react-icons/fi';
 
 function NoteListPage() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = React.useState(searchParams.get('keyword') || '');
   const [notes, setNotes] = React.useState(getAllNotes());
-  const [keyword, setKeyword] = React.useState('');
-
+  
   const handleDelete = (id) => {
     deleteNote(id);
     setNotes(getAllNotes());
@@ -25,8 +27,10 @@ function NoteListPage() {
   };
 
   const handleSearchChange = (event) => {
-    setKeyword(event.target.value);
-  };
+  const newKeyword = event.target.value;
+  setKeyword(newKeyword);
+  setSearchParams({ keyword: newKeyword }); // update URL
+};
 
   // Filter berdasarkan keyword & non-arsip
   const filteredNotes = notes.filter((note) =>

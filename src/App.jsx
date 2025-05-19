@@ -4,6 +4,7 @@ import NoteListPage from './pages/NoteListPage';
 import AddNotePage from './pages/AddNotePage';
 import DetailPage from './pages/DetailPage';
 import ArchivePage from './pages/ArchivePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/tambah" element={<AddNotePage />} />
         <Route path="/notes/:id" element={<DetailPage />} />
         <Route path="/archieve" element={<ArchivePage />} /> 
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
