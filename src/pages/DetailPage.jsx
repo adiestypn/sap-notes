@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/local-data';
 import { showFormattedDate } from '../utils';
+import { FiArchive, FiInbox, FiTrash2 } from 'react-icons/fi';
 
 function DetailPage() {
   const { id } = useParams();
@@ -18,14 +19,16 @@ function DetailPage() {
   };
 
     const handleArchive = () => {
-    if (note.archived) {
-        unarchiveNote(id);
+        if (note.archived) {
+            unarchiveNote(id);
+        } else {
+            archiveNote(id);
+        }
+
+        // ✅ Selalu kembali ke halaman utama
         navigate('/');
-    } else {
-        archiveNote(id);
-        navigate('/arsip');
-    }
-    };
+        };
+
 
 
   return (
@@ -36,10 +39,10 @@ function DetailPage() {
 
       <div className="detail-page__action">
         <button className="button" onClick={handleArchive}>
-          {note.archived ? 'Pindahkan' : 'Arsipkan'}
+          {note.archived ? <FiInbox /> : <FiArchive />}
         </button>
         <button className="button" onClick={handleDelete}>
-          Hapus
+          <FiTrash2 />
         </button>
       </div>
     </main>

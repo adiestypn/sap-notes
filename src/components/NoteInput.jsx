@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiCheck, FiPlus } from 'react-icons/fi';
 
 class NoteInput extends React.Component {
   constructor(props) {
@@ -51,7 +52,10 @@ class NoteInput extends React.Component {
           value={this.state.body}
           onChange={this.onBodyChangeEventHandler}
         ></textarea>
-        <button type="submit">Tambah</button>
+        <button type="submit" className="icon-button" title="Tambah Catatan">
+          <FiCheck />
+        </button>
+
       </form>
     );
   }

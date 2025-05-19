@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import { getAllNotes, deleteNote, archiveNote, unarchiveNote, getNote } from '../utils/local-data';
+import { FiPlus } from 'react-icons/fi';
 
 function NoteListPage() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ function NoteListPage() {
 
       {/* ➕ Tombol Tambah */}
       <div className="homepage__action">
-        <button className="action" onClick={() => navigate('/tambah')}>+</button>
+        <button className="action" onClick={() => navigate('/tambah')}><FiPlus /></button>
       </div>
     </main>
   );
