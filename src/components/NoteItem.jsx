@@ -7,7 +7,7 @@ function NoteItem({ id, title, body, createdAt, archived, onDelete, onArchive })
   return (
     <div className="note-item">
       <NoteItemBody
-        title={<Link to={`/catatan/${id}`} className="bold-underline">{title}</Link>}
+        title={<Link to={`/notes/${id}`} className="bold-underline">{title}</Link>}
         body={body}
         date={createdAt}
       />

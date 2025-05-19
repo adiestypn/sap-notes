@@ -90,14 +90,15 @@ main {
 }
 
 .notes-list-empty {
-  margin-top: 32px;
-  padding: 16px 8px;
-}
-
-.notes-list-empty p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* Pastikan ini ada */
   text-align: center;
   color: var(--on-background-grey);
+  font-size: 20px;
 }
+
 
 .note-item {
   padding: 8px 16px 16px 16px;
@@ -147,22 +148,37 @@ main {
 }
 
 .note-input {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 16px;
+  padding: 24px 16px;
 }
+
 
 .note-input input[type="text"],
 .note-input textarea {
-  padding: 8px;
-  border: 1px solid var(--on-background);
-  border-radius: 4px;
+  width: 100%;
+  max-width: 100%;
   background-color: transparent;
+  border: 1px solid var(--on-background);
   color: var(--on-background);
-  font-family: 'Inter', sans-serif;
-  font-size: 50px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 20px;
+  outline: none;
+  resize: vertical;
 }
+
+
+.note-input input[type="text"]:focus,
+.note-input textarea:focus {
+  border-color: var(--primary); 
+  outline: none; 
+}
+
 
 .note-input button {
   align-self: flex-start;

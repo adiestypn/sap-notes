@@ -15,7 +15,7 @@ function App() {
         <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
         </h1>
         <nav>
-              <Link to="/arsip" className="nav-link nav-link--lg">
+              <Link to="/archieve" className="nav-link nav-link--lg">
               Arsip
               </Link>
         </nav>
@@ -25,8 +25,8 @@ function App() {
       <Routes>
         <Route path="/" element={<NoteListPage />} />
         <Route path="/tambah" element={<AddNotePage />} />
-        <Route path="/catatan/:id" element={<DetailPage />} />
-        <Route path="/arsip" element={<ArchivePage />} /> 
+        <Route path="/notes/:id" element={<DetailPage />} />
+        <Route path="/archieve" element={<ArchivePage />} /> 
       </Routes>
     </div>
   );

@@ -59,8 +59,6 @@ getFilteredNotes(isArchived) {
   );
 }
 
-
-
   render() {
     return (
       <div className="note-app">
