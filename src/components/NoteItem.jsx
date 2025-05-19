@@ -15,21 +15,14 @@ function NoteItem({ id, title, body, createdAt, archived, onDelete, onArchive })
         <p className="note-item__body">{body}</p>
       </div>
 
+     {onDelete && onArchive && (
       <div className="note-item__action">
-        <button
-          className="note-item__archive-button"
-          onClick={() => onArchive(id)}
-        >
+        <button onClick={() => onArchive(id)}>
           {archived ? 'Pindahkan' : 'Arsipkan'}
         </button>
-        
-        <button
-          className="note-item__delete-button"
-          onClick={() => onDelete(id)}
-        >
-          Hapus
-        </button>
+        <button onClick={() => onDelete(id)}>Hapus</button>
       </div>
+)}
     </div>
   );
 }

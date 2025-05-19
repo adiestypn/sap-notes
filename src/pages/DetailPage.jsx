@@ -17,14 +17,16 @@ function DetailPage() {
     navigate('/');
   };
 
-  const handleArchive = () => {
+    const handleArchive = () => {
     if (note.archived) {
-      unarchiveNote(id);
+        unarchiveNote(id);
+        navigate('/');
     } else {
-      archiveNote(id);
+        archiveNote(id);
+        navigate('/arsip');
     }
-    navigate('/');
-  };
+    };
+
 
   return (
     <main className="detail-page">
@@ -33,10 +35,10 @@ function DetailPage() {
       <div className="detail-page__body">{note.body}</div>
 
       <div className="detail-page__action">
-        <button className="action" onClick={handleArchive}>
+        <button className="button" onClick={handleArchive}>
           {note.archived ? 'Pindahkan' : 'Arsipkan'}
         </button>
-        <button className="action" onClick={handleDelete}>
+        <button className="button" onClick={handleDelete}>
           Hapus
         </button>
       </div>

@@ -41,7 +41,7 @@ function NoteListPage() {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Cari catatan..."
+          placeholder="Cari catatan berdasarkan judul..."
           value={keyword}
           onChange={handleSearchChange}
         />
@@ -50,8 +50,6 @@ function NoteListPage() {
       {/* 📋 Daftar Catatan */}
       <NoteList
         notes={filteredNotes}
-        onDelete={handleDelete}
-        onArchive={handleArchive}
       />
 
       {/* ➕ Tombol Tambah */}
