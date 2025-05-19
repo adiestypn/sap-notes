@@ -93,7 +93,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 300px; /* Pastikan ini ada */
+  min-height: 300px;
   text-align: center;
   color: var(--on-background-grey);
   font-size: 20px;
@@ -230,7 +230,7 @@ main {
   }
 }
 
-/* ➕ Tombol tambah catatan (floating action button) */
+
 .homepage__action {
   position: fixed;
   bottom: 32px;
@@ -296,14 +296,14 @@ main {
 }
 
 .detail-page {
-  max-width: 1000px;      /* Atur lebar maksimum */
-  margin: 0 auto;        /* Center horizontal */
-  padding: 32px 24px;    /* Jarak isi ke pinggir */
+  max-width: 1000px;      
+  margin: 0 auto;        
+  padding: 32px 24px;    
 }
 
 .detail-page__title {
-  font-size: 64px;       /* Ubah ini ke lebih besar dari sebelumnya */
-  font-weight: 800;      /* Lebih tebal */
+  font-size: 64px;       
+  font-weight: 800;     
   line-height: 1.2;
   margin-bottom: 2px;
   word-break: break-word;

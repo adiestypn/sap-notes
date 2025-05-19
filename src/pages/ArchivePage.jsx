@@ -35,10 +35,8 @@ function ArchivePage() {
         />
       </div>
 
-      {/* ❌ Hilangkan tombol karena tidak kirim handler */}
       <NoteList
         notes={filteredNotes}
-        // Tidak kirim onDelete & onArchive = tombol tidak muncul
       />
     </main>
   );

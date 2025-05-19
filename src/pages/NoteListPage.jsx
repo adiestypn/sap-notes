@@ -29,10 +29,9 @@ function NoteListPage() {
   const handleSearchChange = (event) => {
   const newKeyword = event.target.value;
   setKeyword(newKeyword);
-  setSearchParams({ keyword: newKeyword }); // update URL
+  setSearchParams({ keyword: newKeyword });
 };
 
-  // Filter berdasarkan keyword & non-arsip
   const filteredNotes = notes.filter((note) =>
     !note.archived &&
     note.title.toLowerCase().includes(keyword.toLowerCase())
@@ -52,13 +51,12 @@ function NoteListPage() {
         />
       </div>
 
-      {/* 📋 Daftar Catatan */}
       <NoteList
       notes={filteredNotes}
      />
 
       <div className="homepage__action">
-        <button className="action tooltip" onClick={() => navigate('/tambah')}>
+        <button className="action tooltip" onClick={() => navigate('/notes/new')}>
             <FiPlus />
             <span className="tooltip-text">Tambah</span>
         </button>

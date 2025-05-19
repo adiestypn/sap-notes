@@ -77,13 +77,13 @@ getFilteredNotes(isArchived) {
         <NoteInput addNote={this.onAddNoteHandler} />
         <h2>Catatan Aktif</h2>
         <NoteList
-          notes={this.getFilteredNotes(false)} // hanya catatan aktif yg cocok keyword
+          notes={this.getFilteredNotes(false)} 
           onDelete={this.onDeleteHandler}
           onArchive={this.onArchiveHandler}
         />
         <h2>Catatan Arsip</h2>
         <NoteList
-          notes={this.getFilteredNotes(true)} // hanya catatan arsip yg cocok keyword
+          notes={this.getFilteredNotes(true)} 
           onDelete={this.onDeleteHandler}
           onArchive={this.onArchiveHandler}
         />

@@ -36,8 +36,8 @@ NoteList.propTypes = {
       archived: PropTypes.bool.isRequired,
     })
   ).isRequired,
-  onDelete: PropTypes.func, // tidak wajib
-  onArchive: PropTypes.func, // tidak wajib
+  onDelete: PropTypes.func, 
+  onArchive: PropTypes.func, 
 };
 
 export default NoteList;

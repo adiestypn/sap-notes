@@ -8,7 +8,7 @@ function AddNotePage() {
 
   const handleAddNote = ({ title, body }) => {
     addNote({ title, body });
-    navigate('/'); // kembali ke halaman utama
+    navigate('/'); 
   };
 
   return (
