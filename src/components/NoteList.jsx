@@ -6,7 +6,7 @@ function NoteList({ notes, onDelete, onArchive }) {
   if (notes.length === 0) {
     return (
       <div className="notes-list-empty">
-        <p>Tidak ada catatan </p>
+        <p>Tidak ada catatan</p>
       </div>
     );
   }
@@ -29,15 +29,15 @@ function NoteList({ notes, onDelete, onArchive }) {
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       archived: PropTypes.bool.isRequired,
     })
   ).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onArchive: PropTypes.func.isRequired,
+  onDelete: PropTypes.func, // tidak wajib
+  onArchive: PropTypes.func, // tidak wajib
 };
 
 export default NoteList;

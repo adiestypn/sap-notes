@@ -54,10 +54,9 @@ function NoteListPage() {
 
       {/* 📋 Daftar Catatan */}
       <NoteList
-        notes={filteredNotes}
-      />
+      notes={filteredNotes}
+     />
 
-      {/* ➕ Tombol Tambah */}
       <div className="homepage__action">
         <button className="action tooltip" onClick={() => navigate('/tambah')}>
             <FiPlus />

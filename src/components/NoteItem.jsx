@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import NoteItemBody from './NoteItemBody';
-import { showFormattedDate } from '../utils';
 
 function NoteItem({ id, title, body, createdAt, archived, onDelete, onArchive }) {
   return (
@@ -13,12 +12,16 @@ function NoteItem({ id, title, body, createdAt, archived, onDelete, onArchive })
         date={createdAt}
       />
 
-      {onDelete && onArchive && (
+      {(onDelete || onArchive) && (
         <div className="note-item__action">
-          <button onClick={() => onArchive(id)}>
-            {archived ? 'Pindahkan' : 'Arsipkan'}
-          </button>
-          <button onClick={() => onDelete(id)}>Hapus</button>
+          {onArchive && (
+            <button onClick={() => onArchive(id)}>
+              {archived ? 'Pindahkan' : 'Arsipkan'}
+            </button>
+          )}
+          {onDelete && (
+            <button onClick={() => onDelete(id)}>Hapus</button>
+          )}
         </div>
       )}
     </div>
@@ -26,13 +29,13 @@ function NoteItem({ id, title, body, createdAt, archived, onDelete, onArchive })
 }
 
 NoteItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onArchive: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
+  onArchive: PropTypes.func,
 };
 
 export default NoteItem;
