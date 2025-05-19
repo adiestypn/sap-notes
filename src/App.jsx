@@ -10,19 +10,15 @@ import NotFoundPage from './pages/NotFoundPage';
 function App() {
   return (
     <div className="app-container">
-      {/* ✅ HEADER UMUM */}
       <header>
         <h1>
         <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
         </h1>
         <nav>
-              <Link to="/archieve" className="nav-link nav-link--lg">
-              Arsip
-              </Link>
+        <Link to="/archieve" className="nav-link nav-link--lg">Arsip</Link>
         </nav>
       </header>
 
-      {/* ✅ HALAMAN UTAMA */}
       <Routes>
         <Route path="/" element={<NoteListPage />} />
         <Route path="/tambah" element={<AddNotePage />} />

@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { showFormattedDate } from '../utils';
+
 
 function NoteItemBody({ title, body, date }) {
   return (
@@ -10,5 +12,12 @@ function NoteItemBody({ title, body, date }) {
     </div>
   );
 }
+
+NoteItemBody.propTypes = {
+  title: PropTypes.node.isRequired,
+  body: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+};
+
 
 export default NoteItemBody;
