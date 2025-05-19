@@ -15,7 +15,7 @@ function App() {
         <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
         </h1>
         <nav>
-        <Link to="/archieve" className="nav-link nav-link--lg">Arsip</Link>
+        <Link to="/archive" className="nav-link nav-link--lg">Arsip</Link>
         </nav>
       </header>
 
@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<NoteListPage />} />
         <Route path="/notes/new" element={<AddNotePage />} />
         <Route path="/notes/:id" element={<DetailPage />} />
-        <Route path="/archieve" element={<ArchivePage />} /> 
+        <Route path="/archive" element={<ArchivePage />} /> 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
