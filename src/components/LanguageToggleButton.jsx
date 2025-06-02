@@ -1,12 +1,11 @@
-// src/components/LanguageToggleButton.jsx
 import React from 'react';
-import { useLanguage } from '../contexts/LanguageContext'; // Impor custom hook useLanguage
-import useTranslation from '../hooks/useTranslation'; // Untuk mendapatkan teks tombol jika diperlukan
+import { useLanguage } from '../contexts/LanguageContext'; 
+import useTranslation from '../hooks/useTranslation'; 
 import { RiTranslate } from "react-icons/ri";
 
 function LanguageToggleButton() {
   const { language, toggleLanguage } = useLanguage();
-  const { t } = useTranslation(); // Untuk teks pada tombol jika Anda mau
+  const { t } = useTranslation(); 
 
   return (
     <button

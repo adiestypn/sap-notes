@@ -47,12 +47,7 @@ class RegisterInput extends React.Component {
 
 RegisterInput.propTypes = {
   register: PropTypes.func.isRequired,
-  t: PropTypes.func, // Tambahkan prop type untuk 't' (opsional tapi baik)
+  t: PropTypes.func, 
 };
-
-// Berikan default prop untuk 't' jika tidak di-pass, agar tidak error
-// Meskipun lebih baik memastikan 't' selalu di-pass jika terjemahan adalah fitur inti.
-// Alternatifnya, berikan fallback di dalam pemanggilan t(), misal t('nameInputPlaceholder', 'Nama')
-// jika hook useTranslation Anda mendukung fallback. Hook yang kita buat mengembalikan key jika tidak ditemukan.
 
 export default RegisterInput;

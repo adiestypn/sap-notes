@@ -1,4 +1,3 @@
-// src/components/Navigation.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -15,7 +14,7 @@ function Navigation({ logout, name }) {
       <Link
         to="/archive"
         className="nav-link nav-link--lg"
-        title={t('archiveLink')} // Tambahkan title jika perlu
+        title={t('archiveLink')} 
       >
         {t('archiveLink')}
       </Link>

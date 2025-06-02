@@ -1,4 +1,3 @@
-// src/contexts/LanguageContext.jsx
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 
 const LanguageContext = React.createContext();
@@ -13,9 +12,6 @@ function LanguageProvider({ children }) {
   useEffect(() => {
     localStorage.setItem('language', language);
     console.log('LanguageProvider: Language saved to localStorage and state:', language);
-    // Anda bisa menambahkan dispatch event kustom di sini jika diperlukan untuk kasus yang sangat kompleks,
-    // tapi biasanya perubahan context sudah cukup.
-    // window.dispatchEvent(new CustomEvent('languageChanged', { detail: language }));
   }, [language]);
 
   const toggleLanguage = () => {
@@ -26,14 +22,13 @@ function LanguageProvider({ children }) {
     });
   };
 
-  // useMemo memastikan objek contextValue hanya dibuat ulang jika language berubah.
   const contextValue = useMemo(() => {
     console.log('LanguageProvider: contextValue re-created for language:', language);
     return {
       language,
       toggleLanguage,
     };
-  }, [language]); // Dependency array yang benar adalah [language]
+  }, [language]); 
 
   return (
     <LanguageContext.Provider value={contextValue}>
@@ -47,7 +42,6 @@ function useLanguage() {
   if (context === undefined) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
-  // console.log('useLanguage hook: Consuming language:', context.language); // Bisa sangat verbose
   return context;
 }
 

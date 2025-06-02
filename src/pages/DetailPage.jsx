@@ -1,15 +1,14 @@
-// src/pages/DetailPage.jsx
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/network-data';
 import { showFormattedDate } from '../utils';
 import { FiArchive, FiInbox, FiTrash2 } from 'react-icons/fi';
-import useTranslation from '../hooks/useTranslation'; // Pastikan impor ini ada dan path-nya benar
+import useTranslation from '../hooks/useTranslation'; 
 
 function DetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation(); // Panggil hook di sini
+  const { t } = useTranslation(); 
   const [note, setNote] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
 
@@ -30,14 +29,14 @@ function DetailPage() {
   }, [id]);
 
   const handleDelete = async () => {
-    if (window.confirm(t('confirmDelete'))) { // Teks konfirmasi juga diterjemahkan
+    if (window.confirm(t('confirmDelete'))) { 
       setLoading(true);
       const { error } = await deleteNote(id);
       setLoading(false);
       if (!error) {
         navigate('/');
       } else {
-        alert(t('failedDelete')); // Teks alert juga diterjemahkan
+        alert(t('failedDelete')); 
       }
     }
   };
@@ -55,15 +54,14 @@ function DetailPage() {
     }
     setLoading(false);
     if (!error) {
-      // Refresh data catatan setelah aksi atau navigasi
       const { error: fetchError, data: updatedNoteData } = await getNote(id);
       if (!fetchError) {
-        setNote(updatedNoteData); // Update state note lokal
-      } else { // Jika gagal fetch, mungkin navigasi kembali atau tampilkan pesan
-        navigate('/'); // Contoh: navigasi ke home jika gagal refresh detail
+        setNote(updatedNoteData); 
+      } else { 
+        navigate('/'); 
       }
     } else {
-      alert(note.archived ? t('failedUnarchive') : t('failedArchive')); // Teks alert diterjemahkan
+      alert(note.archived ? t('failedUnarchive') : t('failedArchive')); 
     }
   };
 

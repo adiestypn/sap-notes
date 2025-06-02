@@ -1,10 +1,9 @@
-// src/components/ThemeToggleButton.jsx
 import React from 'react';
-import { useTheme } from '../contexts/ThemeContext'; // Impor custom hook useTheme
-import { FiSun, FiMoon } from 'react-icons/fi'; // Contoh menggunakan react-icons
+import { useTheme } from '../contexts/ThemeContext'; 
+import { FiSun, FiMoon } from 'react-icons/fi'; 
 
 function ThemeToggleButton() {
-  const { theme, toggleTheme } = useTheme(); // Dapatkan tema dan fungsi toggle dari context
+  const { theme, toggleTheme } = useTheme(); 
 
   return (
     <button
@@ -14,8 +13,8 @@ function ThemeToggleButton() {
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        color: 'var(--on-background)', // Sesuaikan dengan warna ikon yang diinginkan
-        fontSize: '24px', // Sesuaikan ukuran ikon
+        color: 'var(--on-background)',
+        fontSize: '24px', 
         padding: '8px'
       }}
     >

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NoteItem from './NoteItem';
-import useTranslation from '../hooks/useTranslation'; // Impor hook
+import useTranslation from '../hooks/useTranslation'; 
 
 function NoteList({ notes, onDelete, onArchive }) {
-  const { t } = useTranslation(); // Panggil hook
+  const { t } = useTranslation(); 
 
   if (notes.length === 0) {
     return (

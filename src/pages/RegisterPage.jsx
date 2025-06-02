@@ -2,29 +2,28 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RegisterInput from '../components/RegisterInput';
-import { register } from '../utils/network-data'; // Direkomendasikan menggunakan network-data.js jika sudah disesuaikan
-import useTranslation from '../hooks/useTranslation'; // Impor hook
+import { register } from '../utils/network-data'; 
+import useTranslation from '../hooks/useTranslation'; 
 
 function RegisterPage() {
   const navigate = useNavigate();
-  const { t } = useTranslation(); // Panggil hook di sini
+  const { t } = useTranslation(); 
 
   async function onRegisterHandler(user) {
     const { error } = await register(user);
     if (!error) {
-      navigate('/login'); // Arahkan ke login setelah register, bukan '/' jika itu halaman catatan
+      navigate('/login'); 
     }
   }
 
   return (
     <section className='register-page'>
-      <h2>{t('registerTitle')}</h2> {/* Judul halaman diterjemahkan */}
-      {/* Teruskan fungsi 't' sebagai prop ke RegisterInput */}
+      <h2>{t('registerTitle')}</h2> 
       <RegisterInput register={onRegisterHandler} t={t} />
       <p>
-        {t('toLoginPagePrompt')} {/* Teks prompt */}
+        {t('toLoginPagePrompt')} 
         {' '}
-        <Link to="/login">{t('toLoginPageLink')}</Link> {/* Teks link */}
+        <Link to="/login">{t('toLoginPageLink')}</Link> 
       </p>
     </section>
   )

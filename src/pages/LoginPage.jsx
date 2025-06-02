@@ -1,13 +1,12 @@
-// src/pages/LoginPage.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LoginInput from '../components/LoginInput';
 import { login } from '../utils/network-data';
-import useTranslation from '../hooks/useTranslation'; // Pastikan path ini benar
+import useTranslation from '../hooks/useTranslation'; 
 
 function LoginPage({ loginSuccess }) {
-  const { t } = useTranslation(); // Panggil hook untuk mendapatkan fungsi t
+  const { t } = useTranslation(); 
 
   async function onLogin({ email, password }) {
     const { error, data } = await login({ email, password });
@@ -15,9 +14,6 @@ function LoginPage({ loginSuccess }) {
     if (!error) {
       loginSuccess(data);
     }
-    // else {
-    //   alert(t('loginFailedMessage') || 'Login gagal, periksa email dan password Anda.'); // Contoh pesan error
-    // }
   }
 
   return (
@@ -25,10 +21,9 @@ function LoginPage({ loginSuccess }) {
       <h2>{t('loginTitle')}</h2>
       <LoginInput login={onLogin} />
       <p>
-        {t('toRegisterPagePrompt')} {/* Teks sebelum link */}
-        {' '} {/* Spasi jika diperlukan antara prompt dan link */}
-        <Link to="/register">{t('toRegisterPageLink')}</Link> {/* Teks link di dalam komponen Link */}
-        {/* Pastikan tidak ada {t('toRegisterPageLink')} lagi setelah ini */}
+        {t('toRegisterPagePrompt')} 
+        {' '} 
+        <Link to="/register">{t('toRegisterPageLink')}</Link> 
       </p>
     </section>
   );

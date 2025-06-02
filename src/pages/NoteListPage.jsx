@@ -26,28 +26,25 @@ function NoteListPage() {
     };
 
     fetchActiveNotes();
-  }, []); // ✅ Jangan lupa array dependency
+  }, []); // 
 
   const handleDelete = async (id) => {
-    setLoading(true); // Menandakan proses dimulai
-    const { error: deleteError } = await deleteNote(id); // 1. Panggil deleteNote dari network-data.js (atau api.js)
-
+    setLoading(true); 
+    const { error: deleteError } = await deleteNote(id); 
     if (!deleteError) {
-      // 2. Jika berhasil menghapus, ambil kembali daftar catatan terbaru dari API
+
       const { error: fetchError, data: updatedNotes } = await getActiveNotes();
       if (!fetchError) {
-        setNotes(updatedNotes); // 3. Update state notes dengan data terbaru
+        setNotes(updatedNotes); 
       } else {
         console.error("Gagal mengambil catatan setelah menghapus.", fetchError);
         alert("Gagal memuat ulang catatan setelah penghapusan.");
-        // Pertimbangkan untuk tidak mengubah state notes jika pengambilan ulang gagal,
-        // atau setidaknya beri tahu pengguna.
       }
     } else {
       alert("Gagal menghapus catatan.");
       console.error("Error saat menghapus catatan:", deleteError);
     }
-    setLoading(false); // Menandakan proses selesai
+    setLoading(false); 
   };
 
   const handleArchive = async (id) => {
@@ -91,11 +88,8 @@ function NoteListPage() {
           onChange={handleSearchChange}
         />
       </div>
-      {/* NoteList juga perlu diupdate jika menampilkan teks "Tidak ada catatan" */}
       <NoteList
         notes={filteredNotes}
-        // onDelete={handleDelete} // Anda perlu meneruskan handler yang sudah di-i18n-kan pesannya
-        // onArchive={handleArchive}
       />
       <div className="homepage__action">
         <button className="action tooltip" onClick={() => navigate('/notes/new')}>

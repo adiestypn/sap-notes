@@ -1,10 +1,9 @@
-// src/components/LoginInput.jsx
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import useTranslation from '../hooks/useTranslation'; // Pastikan path ini benar
+import useTranslation from '../hooks/useTranslation'; 
 
 function LoginInput({ login }) {
-  const { t } = useTranslation(); // Panggil hook untuk mendapatkan fungsi t
+  const { t } = useTranslation(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,20 +24,20 @@ function LoginInput({ login }) {
     <form onSubmit={onSubmitHandler} className='login-input'>
       <input
         type="email"
-        placeholder={t('emailInputPlaceholder')} // Pastikan 'emailInputPlaceholder' ada
+        placeholder={t('emailInputPlaceholder')}  
         value={email}
         onChange={onEmailChangeHandler}
-        aria-label={t('emailInputPlaceholder')} // Untuk aksesibilitas
+        aria-label={t('emailInputPlaceholder')} 
       />
       <input
         type="password"
-        placeholder={t('passwordInputPlaceholder')} // Pastikan 'passwordInputPlaceholder' ada
+        placeholder={t('passwordInputPlaceholder')} 
         autoComplete='current-password'
         value={password}
         onChange={onPasswordChangeHandler}
-        aria-label={t('passwordInputPlaceholder')} // Untuk aksesibilitas
+        aria-label={t('passwordInputPlaceholder')} 
       />
-      <button type="submit">{t('loginButton')}</button> {/* Pastikan 'loginButton' ada */}
+      <button type="submit">{t('loginButton')}</button> 
     </form>
   );
 }
