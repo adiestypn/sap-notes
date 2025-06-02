@@ -390,6 +390,39 @@ nav a {
   opacity: 0.8; /* Contoh efek hover sederhana */
 }
 
+.language-toggle-button {
+  background-color: transparent; /* Ubah ke transparent jika ingin benar-benar tanpa background tombol */
+  /* Atau jika ingin sama dengan background halaman: background-color: var(--background); */
+  /* Atau jika ingin sama dengan surface (seperti sebelumnya): background-color: var(--surface); */
+  
+  border: none;                 /* Pastikan tidak ada border */
+  outline: none;                /* Pastikan tidak ada outline */
+  
+  color: var(--on-background);  /* Warna ikon */
+  padding: 8px;                 /* Sesuaikan padding untuk ikon agar tidak terlalu mepet */
+  border-radius: 6px;           /* Radius untuk sudut tombol jika diinginkan */
+  cursor: pointer;
+  
+  display: flex;                /* Untuk alignment ikon yang lebih baik */
+  align-items: center;
+  justify-content: center;
+  
+  /* Hapus properti yang mungkin tidak relevan untuk tombol ikon murni */
+  /* font-weight: bold; */
+  /* min-width: 40px; */
+  /* text-align: center; */
+  /* font-family: 'Inter', sans-serif; */ /* Font family tidak terlalu relevan untuk ikon */
+  /* font-size: 1em; */ /* Ukuran ikon diatur via prop 'size' pada komponen ikonnya */
+  
+  transition: color 0.3s ease, opacity 0.3s ease; /* Transisi untuk hover */
+}
+
+.language-toggle-button:hover {
+  opacity: 0.7; /* Efek hover sederhana, bisa juga ubah warna ikon jika mau */
+  /* color: var(--primary); */ /* Contoh jika ingin warna ikon berubah saat hover */
+}
+
+
 @media screen and (min-width: 650px) {
   .notes-list {
     grid-template-columns: repeat(2, 1fr);

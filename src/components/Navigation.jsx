@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 import ThemeToggleButton from './ThemeToggleButton';
+import LanguageToggleButton from './LanguageToggleButton'; 
+import useTranslation from '../hooks/useTranslation'; 
 
 function Navigation({ logout, name }) {
   return (
@@ -16,6 +18,7 @@ function Navigation({ logout, name }) {
       </Link>
 
       <ThemeToggleButton />
+      <LanguageToggleButton />
 
       {name && (
         <>

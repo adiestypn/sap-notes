@@ -1,58 +1,50 @@
-import React from 'react';
+// src/components/LoginInput.jsx
+import React, { useState } from 'react'; // Impor useState
 import PropTypes from 'prop-types';
- 
-class LoginInput extends React.Component {
-  constructor(props) {
-    super(props);
- 
-    this.state = {
-      email: '',
-      password: '',
-    };
- 
-    this.onEmailChangeHandler = this.onEmailChangeHandler.bind(this);
-    this.onPasswordChangeHandler = this.onPasswordChangeHandler.bind(this);
-    this.onSubmitHandler = this.onSubmitHandler.bind(this);
-  }
- 
-  onEmailChangeHandler(event) {
-    this.setState(() => {
-      return {
-        email: event.target.value
-      }
-    })
-  }
- 
-  onPasswordChangeHandler(event) {
-    this.setState(() => {
-      return {
-        password: event.target.value
-      };
-    });
-  }
- 
-  onSubmitHandler(event) {
+
+function LoginInput({ login }) { // Terima props login
+  // Gunakan useState untuk mengelola state email dan password
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Handler untuk perubahan input email
+  const onEmailChangeHandler = (event) => {
+    setEmail(event.target.value);
+  };
+
+  // Handler untuk perubahan input password
+  const onPasswordChangeHandler = (event) => {
+    setPassword(event.target.value);
+  };
+
+  // Handler untuk submit form
+  const onSubmitHandler = (event) => {
     event.preventDefault();
- 
-    this.props.login({
-      email: this.state.email,
-      password: this.state.password,
-    });
-  }
- 
-  render() {
-    return (
-      <form onSubmit={this.onSubmitHandler} className='login-input'>
-        <input type="email" placeholder='Email' value={this.state.email} onChange={this.onEmailChangeHandler} />
-        <input type="password" placeholder='Password' value={this.state.password} onChange={this.onPasswordChangeHandler} />
-        <button>Masuk</button>
-      </form>
-    );
-  }
+    login({ email, password }); // Panggil fungsi login dari props
+  };
+
+  return (
+    <form onSubmit={onSubmitHandler} className='login-input'>
+      <input
+        type="email"
+        placeholder='Email'
+        value={email}
+        onChange={onEmailChangeHandler}
+      />
+      <input
+        type="password"
+        placeholder='Password'
+        autoComplete='current-password' // Sebaiknya tambahkan autoComplete
+        value={password}
+        onChange={onPasswordChangeHandler}
+      />
+      <button type="submit">Masuk</button> {/* Tambahkan type="submit" pada button */}
+    </form>
+  );
 }
- 
+
 LoginInput.propTypes = {
   login: PropTypes.func.isRequired,
-}
- 
+};
+
 export default LoginInput;

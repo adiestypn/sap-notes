@@ -15,7 +15,7 @@ function RegisterPage() {
  
   return (
     <section className='register-page'>
-      <h2>Register</h2>
+      <h2>Isi form untuk mendaftar akun.</h2>
       <RegisterInput register={onRegisterHandler} />
       <p>Kembali ke <Link to="/">Masuk</Link></p>
     </section>
