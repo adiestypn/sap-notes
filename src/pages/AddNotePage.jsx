@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoteInput from '../components/NoteInput';
-import { addNote } from '../utils/api'; // Pastikan diimpor dari api.js
+import { addNote } from '../utils/network-data'; // Pastikan diimpor dari api.js
 import useTranslation from '../hooks/useTranslation';
 
 function AddNotePage() {
