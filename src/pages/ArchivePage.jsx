@@ -4,10 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 // Ubah impor getArchivedNotes ke network-data.js
 import { getArchivedNotes, unarchiveNote /* Jika ingin ada tombol unarchive di sini */ } from '../utils/network-data';
+import useTranslation from '../hooks/useTranslation'; 
 // Anda mungkin juga butuh useNavigate jika ada aksi seperti unarchive dari halaman ini
 // import { useNavigate } from 'react-router-dom';
 
 function ArchivePage() {
+  const { t } = useTranslation();
   // const navigate = useNavigate(); // Uncomment jika perlu navigasi
   const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = React.useState(searchParams.get('keyword') || '');
@@ -58,17 +60,17 @@ function ArchivePage() {
     note.title.toLowerCase().includes(keyword.toLowerCase())
   );
 
-  if (loading) {
-    return <main><p style={{ padding: '32px', textAlign: 'center' }}>Memuat catatan arsip...</p></main>;
+if (loading) {
+    return <main><p style={{ padding: '32px', textAlign: 'center' }}>{t('loadingNotes')}</p></main>; // atau buat key baru loadingArchivedNotes
   }
 
   return (
     <main>
-      <h2>Catatan Arsip</h2>
+      <h2>{t('archivedNotesTitle')}</h2>
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Cari catatan arsip..."
+          placeholder={t('searchPlaceholder')} // atau searchArchivedPlaceholder
           value={keyword}
           onChange={handleSearchChange}
         />

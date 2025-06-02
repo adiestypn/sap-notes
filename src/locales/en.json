@@ -1,7 +1,7 @@
 {
   "appName": "Notes App",
   "loginTitle": "Please login to continue ...",
-  "registerTitle": "No need to be too serious about the content ...",
+  "registerTitle": "Fill the form to register account.",
   "loginButton": "Login",
   "registerButton": "Register",
   "logoutButton": "Logout",
@@ -29,5 +29,12 @@
   "emailInputPlaceholder": "Email",
   "passwordInputPlaceholder": "Password",
   "toLoginPage": "Back to Login",
-  "toRegisterPage": "Don't have an account? Register here."
+  "toRegisterPagePrompt": "Don't have an account?",
+  "toRegisterPageLink": "Register here.",
+  "toLoginPagePrompt": "Already have an account?",
+  "toLoginPageLink": "Login here",
+   "notFoundTitle": "404 - Page Not Found", 
+  "notFoundMessage": "Sorry, the page you are looking for is not available.",
+  "titleInputPlaceholder": "Note Title",  
+  "bodyInputPlaceholder": "Note content..." 
 }

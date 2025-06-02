@@ -1,9 +1,9 @@
 {
   "appName": "Aplikasi Catatan",
+  "registerTitle": "Isi form untuk mendaftar akun.",
   "loginTitle": "Silakan masuk untuk melanjutkan ...",
-  "registerTitle": "Gak perlu serius-serius ya isinya ...",
   "loginButton": "Masuk",
-  "registerButton": "Register",
+  "registerButton": "Daftar",
   "logoutButton": "Keluar",
   "archiveLink": "Arsip",
   "activeNotesTitle": "Catatan Aktif",
@@ -18,7 +18,7 @@
   "loadingNotes": "Memuat catatan...",
   "loadingApp": "Memuat aplikasi...",
   "noteDetailLoading": "Memuat detail catatan...",
-  "noteNotFound": "Catatan tidak ditemukan atau gagal dimuat.",
+  "NotFound": "Catatan tidak ditemukan atau gagal dimuat.",
   "addNotePageTitle": "Tambah Catatan Baru",
   "confirmDelete": "Apakah Anda yakin ingin menghapus catatan ini?",
   "failedDelete": "Gagal menghapus catatan.",
@@ -28,6 +28,12 @@
   "nameInputPlaceholder": "Nama",
   "emailInputPlaceholder": "Email",
   "passwordInputPlaceholder": "Password",
-  "toLoginPage": "Kembali ke Masuk",
-  "toRegisterPage": "Belum punya akun? Daftar di sini."
+  "toRegisterPagePrompt": "Belum punya akun?",
+  "toRegisterPageLink": "Daftar di sini.",
+  "toLoginPagePrompt": "Sudah punya akun?",
+  "toLoginPageLink": "Masuk di sini",
+  "notFoundTitle": "404 - Halaman Tidak Ditemukan", 
+  "notFoundMessage": "Maaf, halaman yang Anda cari tidak tersedia.",
+  "titleInputPlaceholder": "Judul Catatan",  
+  "bodyInputPlaceholder": "Isi catatan..." 
 }

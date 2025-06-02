@@ -3,9 +3,11 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import { getActiveNotes, deleteNote, archiveNote } from '../utils/network-data';
 import { FiPlus } from 'react-icons/fi';
+import useTranslation from '../hooks/useTranslation';
 
 function NoteListPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation(); 
   const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = React.useState(searchParams.get('keyword') || '');
   const [notes, setNotes] = React.useState([]);
@@ -75,29 +77,30 @@ function NoteListPage() {
   );
 
   if (loading) {
-    return <main><p>Memuat catatan...</p></main>;
+    return <main><p>{t('loadingNotes')}</p></main>;
   }
 
   return (
     <main>
-      <h2>Catatan Aktif</h2>
+      <h2>{t('activeNotesTitle')}</h2>
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Cari berdasarkan judul..."
+          placeholder={t('searchPlaceholder')}
           value={keyword}
           onChange={handleSearchChange}
         />
       </div>
+      {/* NoteList juga perlu diupdate jika menampilkan teks "Tidak ada catatan" */}
       <NoteList
         notes={filteredNotes}
-        //onDelete={handleDelete}
-        //onArchive={handleArchive}
+        // onDelete={handleDelete} // Anda perlu meneruskan handler yang sudah di-i18n-kan pesannya
+        // onArchive={handleArchive}
       />
       <div className="homepage__action">
         <button className="action tooltip" onClick={() => navigate('/notes/new')}>
           <FiPlus />
-          <span className="tooltip-text">Tambah</span>
+          <span className="tooltip-text">{t('addNoteTooltip')}</span>
         </button>
       </div>
     </main>

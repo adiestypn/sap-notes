@@ -1,44 +1,44 @@
 // src/components/LoginInput.jsx
-import React, { useState } from 'react'; // Impor useState
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import useTranslation from '../hooks/useTranslation'; // Pastikan path ini benar
 
-function LoginInput({ login }) { // Terima props login
-  // Gunakan useState untuk mengelola state email dan password
+function LoginInput({ login }) {
+  const { t } = useTranslation(); // Panggil hook untuk mendapatkan fungsi t
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Handler untuk perubahan input email
   const onEmailChangeHandler = (event) => {
     setEmail(event.target.value);
   };
 
-  // Handler untuk perubahan input password
   const onPasswordChangeHandler = (event) => {
     setPassword(event.target.value);
   };
 
-  // Handler untuk submit form
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    login({ email, password }); // Panggil fungsi login dari props
+    login({ email, password });
   };
 
   return (
     <form onSubmit={onSubmitHandler} className='login-input'>
       <input
         type="email"
-        placeholder='Email'
+        placeholder={t('emailInputPlaceholder')} // Pastikan 'emailInputPlaceholder' ada
         value={email}
         onChange={onEmailChangeHandler}
+        aria-label={t('emailInputPlaceholder')} // Untuk aksesibilitas
       />
       <input
         type="password"
-        placeholder='Password'
-        autoComplete='current-password' // Sebaiknya tambahkan autoComplete
+        placeholder={t('passwordInputPlaceholder')} // Pastikan 'passwordInputPlaceholder' ada
+        autoComplete='current-password'
         value={password}
         onChange={onPasswordChangeHandler}
+        aria-label={t('passwordInputPlaceholder')} // Untuk aksesibilitas
       />
-      <button type="submit">Masuk</button> {/* Tambahkan type="submit" pada button */}
+      <button type="submit">{t('loginButton')}</button> {/* Pastikan 'loginButton' ada */}
     </form>
   );
 }

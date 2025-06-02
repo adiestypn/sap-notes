@@ -1,32 +1,39 @@
 // src/contexts/LanguageContext.jsx
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 
-// 1. Buat Context
 const LanguageContext = React.createContext();
 
-// 2. Buat LanguageProvider Component
 function LanguageProvider({ children }) {
-  // State untuk bahasa saat ini, default ke 'id' (Indonesia) atau coba ambil dari localStorage
   const [language, setLanguage] = useState(() => {
     const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'id'; // Default ke 'id'
+    console.log('LanguageProvider: Initial language from localStorage:', savedLanguage);
+    return savedLanguage || 'id';
   });
 
-  // Efek untuk menyimpan bahasa ke localStorage setiap kali berubah
   useEffect(() => {
     localStorage.setItem('language', language);
+    console.log('LanguageProvider: Language saved to localStorage and state:', language);
+    // Anda bisa menambahkan dispatch event kustom di sini jika diperlukan untuk kasus yang sangat kompleks,
+    // tapi biasanya perubahan context sudah cukup.
+    // window.dispatchEvent(new CustomEvent('languageChanged', { detail: language }));
   }, [language]);
 
-  // Fungsi untuk mengganti bahasa
   const toggleLanguage = () => {
-    setLanguage((prevLanguage) => (prevLanguage === 'id' ? 'en' : 'id'));
+    setLanguage((prevLanguage) => {
+      const newLanguage = prevLanguage === 'id' ? 'en' : 'id';
+      console.log('LanguageProvider: Toggling language to:', newLanguage);
+      return newLanguage;
+    });
   };
 
-  // Nilai yang akan disediakan oleh Context
-  const contextValue = useMemo(() => ({
-    language,
-    toggleLanguage,
-  }), [language]);
+  // useMemo memastikan objek contextValue hanya dibuat ulang jika language berubah.
+  const contextValue = useMemo(() => {
+    console.log('LanguageProvider: contextValue re-created for language:', language);
+    return {
+      language,
+      toggleLanguage,
+    };
+  }, [language]); // Dependency array yang benar adalah [language]
 
   return (
     <LanguageContext.Provider value={contextValue}>
@@ -35,13 +42,13 @@ function LanguageProvider({ children }) {
   );
 }
 
-// 3. Custom Hook untuk menggunakan LanguageContext
 function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
+  // console.log('useLanguage hook: Consuming language:', context.language); // Bisa sangat verbose
   return context;
 }
 
-export { LanguageProvider, useLanguage, LanguageContext }; // Ekspor juga LanguageContext jika diperlukan di tempat lain
+export { LanguageProvider, useLanguage, LanguageContext };

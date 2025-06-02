@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 import ThemeToggleButton from './ThemeToggleButton';
-import LanguageToggleButton from './LanguageToggleButton'; 
-import useTranslation from '../hooks/useTranslation'; 
+import LanguageToggleButton from './LanguageToggleButton';
+import useTranslation from '../hooks/useTranslation';
 
 function Navigation({ logout, name }) {
+  const { t } = useTranslation();
+
   return (
-    <nav className="navigation" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+    <nav className="navigation" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       <Link
         to="/archive"
         className="nav-link nav-link--lg"
+        title={t('archiveLink')} // Tambahkan title jika perlu
       >
-        Arsip
+        {t('archiveLink')}
       </Link>
 
       <ThemeToggleButton />
@@ -24,19 +27,12 @@ function Navigation({ logout, name }) {
         <>
           <button
             onClick={logout}
-            title="Logout"
-            className="logout-button" // Tambahkan kelas CSS di sini
-            // Inline style yang masih relevan atau sangat spesifik bisa dipertahankan jika ada,
-            // atau pindahkan semuanya ke CSS jika memungkinkan.
-            // Untuk contoh ini, kita pindahkan semua yang terkait tampilan utama.
-            // style={{ marginRight: '8px' }} // Contoh jika hanya margin yang mau dipertahankan inline
+            title={t('logoutButton')}
+            className="logout-button"
           >
             <FiLogOut size={28} />
           </button>
-
-          <span
-            style={{ color: 'var(--on-surface)', marginLeft: '8px' }} // Sesuaikan margin jika tombol tidak lagi punya marginRight
-          >
+          <span style={{ color: 'var(--on-surface)', marginLeft: '8px' }}>
             {name}
           </span>
         </>

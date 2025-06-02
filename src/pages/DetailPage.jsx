@@ -1,101 +1,97 @@
 // src/pages/DetailPage.jsx
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-// Impor getNote dari network-data.js, bukan local-data.js
-// Juga impor fungsi lain yang mungkin tetap relevan dari network-data.js jika aksi detail juga lewat API
 import { getNote, deleteNote, archiveNote, unarchiveNote } from '../utils/network-data';
 import { showFormattedDate } from '../utils';
 import { FiArchive, FiInbox, FiTrash2 } from 'react-icons/fi';
+import useTranslation from '../hooks/useTranslation'; // Pastikan impor ini ada dan path-nya benar
 
 function DetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [note, setNote] = React.useState(null); // State untuk menyimpan detail catatan
-  const [loading, setLoading] = React.useState(true); // State untuk loading
+  const { t } = useTranslation(); // Panggil hook di sini
+  const [note, setNote] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchNoteDetail = async () => {
       setLoading(true);
-      const { error, data } = await getNote(id); // Panggil getNote dari network-data.js
+      const { error, data } = await getNote(id);
       if (!error) {
         setNote(data);
       } else {
         console.error("Gagal mengambil detail catatan:", data);
-        setNote(null); // Set note ke null jika gagal
+        setNote(null);
       }
       setLoading(false);
     };
 
     fetchNoteDetail();
-  }, [id]); // Tambahkan id sebagai dependency agar useEffect dijalankan lagi jika id berubah
+  }, [id]);
 
-  // Fungsi handleDelete dan handleArchive mungkin perlu dipastikan
-  // apakah akan menggunakan versi dari network-data.js atau local-data.js
-  // Berdasarkan konteks, sebaiknya dari network-data.js
   const handleDelete = async () => {
-    // Pastikan pengguna mengonfirmasi sebelum menghapus
-    if (window.confirm("Apakah Anda yakin ingin menghapus catatan ini?")) {
+    if (window.confirm(t('confirmDelete'))) { // Teks konfirmasi juga diterjemahkan
       setLoading(true);
-      const { error } = await deleteNote(id); // Gunakan deleteNote dari network-data.js
+      const { error } = await deleteNote(id);
       setLoading(false);
       if (!error) {
         navigate('/');
       } else {
-        alert("Gagal menghapus catatan.");
+        alert(t('failedDelete')); // Teks alert juga diterjemahkan
       }
     }
   };
 
   const handleArchive = async () => {
-    if (!note) return; // Pastikan note ada sebelum melakukan aksi
+    if (!note) return;
     setLoading(true);
+    let error;
     if (note.archived) {
-      const { error } = await unarchiveNote(id); // Gunakan unarchiveNote dari network-data.js
-      setLoading(false);
-      if (!error) {
-        // Idealnya, setelah unarchive, navigasi ke halaman yang sesuai atau refresh data
-        navigate('/'); // Atau ke halaman arsip jika ada
-      } else {
-        alert("Gagal memindahkan catatan dari arsip.");
+      const response = await unarchiveNote(id);
+      error = response.error;
+    } else {
+      const response = await archiveNote(id);
+      error = response.error;
+    }
+    setLoading(false);
+    if (!error) {
+      // Refresh data catatan setelah aksi atau navigasi
+      const { error: fetchError, data: updatedNoteData } = await getNote(id);
+      if (!fetchError) {
+        setNote(updatedNoteData); // Update state note lokal
+      } else { // Jika gagal fetch, mungkin navigasi kembali atau tampilkan pesan
+        navigate('/'); // Contoh: navigasi ke home jika gagal refresh detail
       }
     } else {
-      const { error } = await archiveNote(id); // Gunakan archiveNote dari network-data.js
-      setLoading(false);
-      if (!error) {
-        navigate('/');
-      } else {
-        alert("Gagal mengarsipkan catatan.");
-      }
+      alert(note.archived ? t('failedUnarchive') : t('failedArchive')); // Teks alert diterjemahkan
     }
   };
 
+
   if (loading) {
-    return <main><p style={{ padding: '32px', textAlign: 'center' }}>Memuat detail catatan...</p></main>;
+    return <main><p style={{ padding: '32px', textAlign: 'center' }}>{t('noteDetailLoading')}</p></main>;
   }
 
   if (!note) {
-    return <main><p style={{ padding: '32px', textAlign: 'center' }}>Catatan tidak ditemukan atau gagal dimuat.</p></main>;
+    return <main><p style={{ padding: '32px', textAlign: 'center' }}>{t('noteNotFound')}</p></main>;
   }
 
   return (
     <main className="detail-page">
       <h2 className="detail-page__title">{note.title}</h2>
       <p className="detail-page__createdAt">{showFormattedDate(note.createdAt)}</p>
-      {/* API mungkin mengembalikan body sebagai HTML, jika tidak, render seperti biasa */}
       <div className="detail-page__body" dangerouslySetInnerHTML={{ __html: note.body }}></div>
-      {/* Atau jika body adalah plain text: <div className="detail-page__body">{note.body}</div> */}
 
-
-     <div className="detail-page__action">
-        <button className="action tooltip" onClick={handleArchive}>
-            {note.archived ? <FiInbox /> : <FiArchive />}
-            <span className="tooltip-text">{note.archived ? 'Pindahkan' : 'Arsipkan'}</span>
+      <div className="detail-page__action">
+        <button className="action tooltip" onClick={handleArchive} title={note.archived ? t('unarchiveAction') : t('archiveAction')}>
+          {note.archived ? <FiInbox /> : <FiArchive />}
+          <span className="tooltip-text">{note.archived ? t('unarchiveAction') : t('archiveAction')}</span>
         </button>
-        <button className="action tooltip" onClick={handleDelete}>
-            <FiTrash2 />
-            <span className="tooltip-text">Hapus</span>
+        <button className="action tooltip" onClick={handleDelete} title={t('deleteAction')}>
+          <FiTrash2 />
+          <span className="tooltip-text">{t('deleteAction')}</span>
         </button>
-    </div>
+      </div>
     </main>
   );
 }

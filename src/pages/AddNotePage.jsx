@@ -3,29 +3,27 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoteInput from '../components/NoteInput';
 import { addNote } from '../utils/api'; // Pastikan diimpor dari api.js
+import useTranslation from '../hooks/useTranslation';
 
 function AddNotePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Gunakan satu handler ini saja
-  async function onAddNoteHandler(noteData) { // noteData akan berisi { title, body } dari NoteInput
-    const { error, data } = await addNote(noteData); // Panggil addNote dari api.js
-
+  async function onAddNoteHandler(noteData) {
+    const { error, data } = await addNote(noteData);
     if (!error) {
-      navigate('/'); // Navigasi jika berhasil
+      navigate('/');
     } else {
-      // Anda bisa menambahkan penanganan error di sini, misalnya menampilkan alert
-      console.error("Gagal menambahkan catatan:", data ? data.message : "Error tidak diketahui");
-      alert("Gagal menambahkan catatan."); // Atau pesan error yang lebih spesifik jika ada
+      alert(t('failedAddNote')); // Gunakan t()
     }
   }
 
   return (
     <main>
-      {/* Kirim onAddNoteHandler ke NoteInput */}
+      {/* Anda mungkin perlu meneruskan 't' ke NoteInput jika placeholder ada di sana */}
       <NoteInput addNote={onAddNoteHandler} />
     </main>
   );
 }
-
 export default AddNotePage;
