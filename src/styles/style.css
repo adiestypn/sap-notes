@@ -383,9 +383,11 @@ nav a {
 }
 
 .language-toggle-button {
-  border: none;                
-  outline: none;    
+  border: none;
+  outline: none;
   background-color: transparent;
+  color: var(--on-background); 
+  cursor: pointer; 
 }
 
 
