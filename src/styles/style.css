@@ -282,6 +282,113 @@ nav a {
   text-decoration: underline;
 }
 
+/* Styling untuk Halaman Login dan Register */
+.login-page,
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Memusatkan konten secara horizontal */
+  justify-content: center; /* Memusatkan konten secara vertikal jika diinginkan, atau beri padding atas */
+  padding-top: 40px; /* Beri jarak dari header */
+  text-align: center; /* Memusatkan teks seperti judul */
+  min-height: calc(100vh - 150px); /* Contoh tinggi minimum agar konten di tengah, sesuaikan 150px dengan tinggi header/footer Anda */
+}
+
+.login-page h2,
+.register-page h2 {
+  margin-bottom: 24px; /* Jarak bawah dari judul */
+  font-size: 28px; /* Ukuran font judul */
+  color: var(--on-background); /* Warna teks judul */
+}
+
+.login-page p,
+.register-page p {
+  margin-top: 16px; /* Jarak atas dari paragraf (link ke halaman lain) */
+  color: var(--on-background);
+}
+
+.login-page a,
+.register-page a {
+  color: var(--primary); /* Warna link menggunakan variabel primary */
+  text-decoration: underline;
+}
+
+/* Styling untuk Form Input di Login dan Register */
+.login-input,
+.register-input {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Jarak antar input field */
+  width: 100%;
+  max-width: 400px; /* Lebar maksimum form */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--surface); /* Latar belakang form agar sedikit berbeda jika diinginkan */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Tambahkan sedikit shadow jika tema terang */
+}
+
+.login-input input[type="email"],
+.login-input input[type="password"],
+.register-input input[type="text"],
+.register-input input[type="email"],
+.register-input input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--on-background-grey); /* Border input */
+  border-radius: 6px;
+  background-color: var(--background); /* Latar belakang input agar menyatu dengan page background */
+  color: var(--on-background); /* Warna teks input */
+  font-size: 16px;
+  outline: none;
+}
+
+.login-input input[type="email"]:focus,
+.login-input input[type="password"]:focus,
+.register-input input[type="text"]:focus,
+.register-input input[type="email"]:focus,
+.register-input input[type="password"]:focus {
+  border-color: var(--primary); /* Warna border saat fokus */
+}
+
+/* Tombol di dalam form Login dan Register */
+/* Menggunakan gaya .button yang sudah ada jika sesuai, atau buat spesifik */
+.login-input button,
+.register-input button {
+  padding: 12px 16px;
+  background-color: var(--primary); /* Warna tombol */
+  color: var(--on-surface); /* Warna teks tombol, pastikan kontras dengan --primary */
+  /* Jika --on-surface adalah warna gelap, dan --primary terang, mungkin perlu warna spesifik seperti #FFFFFF */
+  /* contoh: color: #FFFFFF; */
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Tombol mengambil lebar penuh form */
+}
+
+.login-input button:hover,
+.register-input button:hover {
+  background-color: var(--primary-variant); /* Warna hover tombol */
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  padding: 0; /* Atur padding jika diperlukan, atau biarkan 0 jika ikon sudah pas */
+  outline: none;
+  cursor: pointer;
+  color: var(--on-surface); /* Warna ikon */
+  display: flex;
+  align-items: center;
+  /* margin-right: 8px; */ /* Anda bisa letakkan margin di sini jika mau */
+}
+
+/* Opsional: Efek hover jika diinginkan */
+.logout-button:hover {
+  opacity: 0.8; /* Contoh efek hover sederhana */
+}
 
 @media screen and (min-width: 650px) {
   .notes-list {

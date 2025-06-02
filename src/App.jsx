@@ -7,7 +7,8 @@ import ArchivePage from './pages/ArchivePage';
 import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
-import Navigation from './components/Navigation'; // Impor komponen Navigation
+import Navigation from './components/Navigation'; 
+import ThemeToggleButton from './components/ThemeToggleButton';
 
 // Impor fungsi-fungsi yang dibutuhkan dari network-data.js
 import { getUserLogged, putAccessToken, getAccessToken } from './utils/network-data'; //
@@ -17,6 +18,7 @@ function App() {
   const [initializing, setInitializing] = React.useState(true);
   const navigate = useNavigate();
 
+  // ... (React.useEffect untuk fetchUser dan onLoginSuccess, onLogout tetap sama)
   React.useEffect(() => {
     const fetchUser = async () => {
       const token = getAccessToken();
@@ -25,7 +27,8 @@ function App() {
         if (!error && data) {
           setAuthedUser(data);
         } else {
-          putAccessToken('');
+          // Token mungkin tidak valid atau ada error, bersihkan
+          putAccessToken(''); 
           setAuthedUser(null);
         }
       }
@@ -53,16 +56,20 @@ function App() {
     navigate('/login');
   };
 
+
   if (initializing) {
-    // Menampilkan pesan loading yang lebih konsisten dengan header
     return (
-      <div className="app-container"> {/* */}
-        <header> {/* */}
+      <div className="app-container">
+        <header>
           <h1>
-            <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link> {/* */}
+            <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
           </h1>
+          {/* Bisa juga tambahkan ThemeToggleButton di sini jika ingin muncul saat loading awal */}
+          <div style={{ display: 'flex', alignItems: 'center' }}> 
+            <ThemeToggleButton />
+          </div>
         </header>
-        <main> {/* */}
+        <main>
           <p style={{ textAlign: 'center', padding: '20px', fontSize: '1.2em' }}>Memuat aplikasi...</p>
         </main>
       </div>
@@ -71,21 +78,21 @@ function App() {
 
   if (authedUser === null) {
     return (
-      <div className="app-container"> {/* */}
-        <header> {/* */}
+      <div className="app-container">
+        <header>
           <h1>
-            <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link> {/* */}
+            <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
           </h1>
-          {/* Tidak menampilkan Navigation component di sini, tapi bisa link Login/Register sederhana jika mau */}
-          <nav>
-            <Link to="/login" className="nav-link nav-link--lg" style={{marginRight: '10px'}}>Login</Link> {/* */}
-            <Link to="/register" className="nav-link nav-link--lg">Register</Link> {/* */}
-          </nav>
+          {/* Ganti navigasi Login/Register dengan tombol tema */}
+          <div style={{ display: 'flex', alignItems: 'center' }}> {/* Wrapper untuk positioning jika diperlukan */}
+            <ThemeToggleButton />
+          </div>
         </header>
-        <main> {/* */}
+        <main>
           <Routes>
             <Route path="/login" element={<LoginPage loginSuccess={onLoginSuccess} />} />
             <Route path="/register" element={<RegisterPage />} />
+            {/* Arahkan semua rute lain ke /login jika belum terautentikasi */}
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </main>
@@ -95,20 +102,25 @@ function App() {
 
   // Jika pengguna sudah login
   return (
-    <div className="app-container"> {/* */}
-      <header> {/* */}
+    <div className="app-container">
+      <header>
         <h1>
-          <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link> {/* */}
+          <Link to="/" className="app-title-link bold-underline">Aplikasi Catatan</Link>
         </h1>
-        {/* Menggunakan komponen Navigation yang sudah diimpor */}
-        <Navigation logout={onLogout} name={authedUser.name} />
+        {/* Menggunakan komponen Navigation yang sudah diimpor dan bisa ditambahkan ThemeToggleButton di dalamnya atau di sini */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <Navigation logout={onLogout} name={authedUser.name} />
+            {/* Jika ThemeToggleButton belum ada di dalam Navigation, Anda bisa letakkan di sini juga */}
+            {/* <ThemeToggleButton /> */} 
+        </div>
       </header>
-      <main> {/* */}
+      <main>
         <Routes>
           <Route path="/" element={<NoteListPage />} />
           <Route path="/notes/new" element={<AddNotePage />} />
           <Route path="/notes/:id" element={<DetailPage />} />
           <Route path="/archive" element={<ArchivePage />} />
+          {/* Jika sudah login, mengakses /login atau /register akan diarahkan ke halaman utama */}
           <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/register" element={<Navigate to="/" />} />
           <Route path="*" element={<NotFoundPage />} />

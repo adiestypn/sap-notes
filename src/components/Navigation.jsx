@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FiArchive, FiLogOut } from 'react-icons/fi'; // Pastikan FiLogOut diimpor
+import { FiLogOut } from 'react-icons/fi';
+import ThemeToggleButton from './ThemeToggleButton';
 
 function Navigation({ logout, name }) {
   return (
@@ -11,38 +12,30 @@ function Navigation({ logout, name }) {
         to="/archive"
         className="nav-link nav-link--lg"
       >
-        Arsip {/* Teks Arsip tanpa ikon */}
+        Arsip
       </Link>
 
-      {/* Menampilkan ikon logout dan nama pengguna */}
+      <ThemeToggleButton />
+
       {name && (
         <>
-          {/* Ikon Logout di sebelah kiri nama */}
           <button
             onClick={logout}
             title="Logout"
-            style={{
-              background: 'none', // Menghilangkan latar belakang button
-              border: 'none', // Menghilangkan border button
-              padding: '0', // Menghilangkan padding default button
-              cursor: 'pointer', // Menjaga cursor pointer
-              color: 'var(--on-surface)', // Menggunakan warna teks dari variabel CSS
-              display: 'flex',
-              alignItems: 'center',
-              marginRight: '8px', // Memberi jarak antara ikon dan nama
-            }}
+            className="logout-button" // Tambahkan kelas CSS di sini
+            // Inline style yang masih relevan atau sangat spesifik bisa dipertahankan jika ada,
+            // atau pindahkan semuanya ke CSS jika memungkinkan.
+            // Untuk contoh ini, kita pindahkan semua yang terkait tampilan utama.
+            // style={{ marginRight: '8px' }} // Contoh jika hanya margin yang mau dipertahankan inline
           >
-            <FiLogOut size={28} /> {/* Atur ukuran ikon jika perlu, contoh size={20} */}
+            <FiLogOut size={28} />
           </button>
 
           <span
-            className="text-on-surface" // Gunakan variabel CSS untuk warna teks
+            style={{ color: 'var(--on-surface)', marginLeft: '8px' }} // Sesuaikan margin jika tombol tidak lagi punya marginRight
           >
             {name}
           </span>
-
-          {/* Pemisah '|' mungkin tidak lagi diperlukan atau bisa dipindahkan/dihapus jika tata letak baru tidak cocok */}
-          {/* <span className="mx-2 text-sm text-gray-400 tablet:hidden mobile:hidden">|</span> */}
         </>
       )}
     </nav>
