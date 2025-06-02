@@ -2,37 +2,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FiArchive, FiLogOut } from 'react-icons/fi'; // Sesuaikan ikon jika perlu
+import { FiArchive, FiLogOut } from 'react-icons/fi'; // Pastikan FiLogOut diimpor
 
 function Navigation({ logout, name }) {
   return (
     <nav className="navigation" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-      <Link 
-        to="/archive" 
-        className="nav-link nav-link--lg" // Gunakan kelas yang ada dari style.css
-        style={{ display: 'flex', alignItems: 'center' }}
+      <Link
+        to="/archive"
+        className="nav-link nav-link--lg"
       >
-        <FiArchive style={{ marginRight: '5px' }} /> Arsip
+        Arsip {/* Teks Arsip tanpa ikon */}
       </Link>
-      
-      {/* Menampilkan nama pengguna dan tombol logout */}
-      {name && ( // Hanya tampilkan jika nama (authedUser.name) ada
+
+      {/* Menampilkan ikon logout dan nama pengguna */}
+      {name && (
         <>
-          <span className="mx-2 text-sm text-gray-400 tablet:hidden mobile:hidden">|</span> {/* Pemisah, bisa disesuaikan atau dihapus */}
-          <span 
-            className="text-on-surface" // Gunakan variabel CSS untuk warna teks
-            style={{ marginRight: '10px' }}
-          >
-            Halo, {name}!
-          </span>
-          <button 
-            onClick={logout} 
-            className="button" // Gunakan kelas button dari style.css
+          {/* Ikon Logout di sebelah kiri nama */}
+          <button
+            onClick={logout}
             title="Logout"
-            style={{ display: 'flex', alignItems: 'center', padding: '8px 12px', fontSize: '0.9em' }}
+            style={{
+              background: 'none', // Menghilangkan latar belakang button
+              border: 'none', // Menghilangkan border button
+              padding: '0', // Menghilangkan padding default button
+              cursor: 'pointer', // Menjaga cursor pointer
+              color: 'var(--on-surface)', // Menggunakan warna teks dari variabel CSS
+              display: 'flex',
+              alignItems: 'center',
+              marginRight: '8px', // Memberi jarak antara ikon dan nama
+            }}
           >
-            <FiLogOut style={{ marginRight: '5px' }} /> Logout
+            <FiLogOut size={28} /> {/* Atur ukuran ikon jika perlu, contoh size={20} */}
           </button>
+
+          <span
+            className="text-on-surface" // Gunakan variabel CSS untuk warna teks
+          >
+            {name}
+          </span>
+
+          {/* Pemisah '|' mungkin tidak lagi diperlukan atau bisa dipindahkan/dihapus jika tata letak baru tidak cocok */}
+          {/* <span className="mx-2 text-sm text-gray-400 tablet:hidden mobile:hidden">|</span> */}
         </>
       )}
     </nav>
@@ -41,7 +51,7 @@ function Navigation({ logout, name }) {
 
 Navigation.propTypes = {
   logout: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired, // Pastikan name juga required jika selalu ada saat login
+  name: PropTypes.string.isRequired,
 };
 
 export default Navigation;

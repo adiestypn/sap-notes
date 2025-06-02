@@ -67,13 +67,13 @@ async function getUserLogged() {
   return { error: false, data: responseJson.data };
 }
  
-async function addNote({ name, tag }) {
-  const response = await fetchWithToken(`${BASE_URL}/contacts`, {
+async function addNote({ title, body }) {
+  const response = await fetchWithToken(`${BASE_URL}/notes`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ name, tag }),
+    body: JSON.stringify({ title, body }),
   });
  
   const responseJson = await response.json();

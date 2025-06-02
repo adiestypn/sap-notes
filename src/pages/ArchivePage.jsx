@@ -1,14 +1,34 @@
+// src/pages/ArchivePage.jsx
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
-import { getArchivedNotes } from '../utils/local-data';
+// Ubah impor getArchivedNotes ke network-data.js
+import { getArchivedNotes, unarchiveNote /* Jika ingin ada tombol unarchive di sini */ } from '../utils/network-data';
+// Anda mungkin juga butuh useNavigate jika ada aksi seperti unarchive dari halaman ini
+// import { useNavigate } from 'react-router-dom';
 
 function ArchivePage() {
+  // const navigate = useNavigate(); // Uncomment jika perlu navigasi
   const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = React.useState(searchParams.get('keyword') || '');
-  const [notes, setNotes] = React.useState(getArchivedNotes());
+  const [notes, setNotes] = React.useState([]); // Inisialisasi dengan array kosong
+  const [loading, setLoading] = React.useState(true); // Tambahkan state loading
 
-  
+  React.useEffect(() => {
+    const fetchArchivedNotes = async () => {
+      setLoading(true);
+      const { error, data } = await getArchivedNotes(); // Panggil dari network-data.js
+      if (!error) {
+        setNotes(data);
+      } else {
+        console.error("Gagal mengambil catatan arsip:", data);
+        setNotes([]); // Atau tangani error sesuai kebutuhan
+      }
+      setLoading(false);
+    };
+
+    fetchArchivedNotes();
+  }, []); // Jalankan sekali saat komponen dimuat
 
   const handleSearchChange = (event) => {
     const newKeyword = event.target.value;
@@ -16,16 +36,35 @@ function ArchivePage() {
     setSearchParams({ keyword: newKeyword });
   };
 
+  // Fungsi untuk unarchive jika ingin ada tombolnya di halaman ini
+  // const handleUnarchive = async (id) => {
+  //   setLoading(true);
+  //   const { error } = await unarchiveNote(id);
+  //   if (!error) {
+  //     // Ambil ulang daftar catatan arsip setelah unarchive
+  //     const { error: fetchError, data: updatedNotes } = await getArchivedNotes();
+  //     if (!fetchError) {
+  //       setNotes(updatedNotes);
+  //     } else {
+  //       console.error("Gagal memuat ulang catatan arsip.");
+  //     }
+  //   } else {
+  //     alert("Gagal memindahkan catatan dari arsip.");
+  //   }
+  //   setLoading(false);
+  // };
 
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(keyword.toLowerCase())
   );
 
+  if (loading) {
+    return <main><p style={{ padding: '32px', textAlign: 'center' }}>Memuat catatan arsip...</p></main>;
+  }
+
   return (
     <main>
       <h2>Catatan Arsip</h2>
-
-      {/* 🔍 Bar pencarian */}
       <div className="search-bar">
         <input
           type="text"
@@ -34,9 +73,10 @@ function ArchivePage() {
           onChange={handleSearchChange}
         />
       </div>
-
       <NoteList
         notes={filteredNotes}
+        // onUnarchive={handleUnarchive} // Teruskan fungsi ini jika ada tombol unarchive di NoteItem untuk konteks arsip
+        // onDelete={...} // Jika ingin ada tombol delete di halaman arsip
       />
     </main>
   );

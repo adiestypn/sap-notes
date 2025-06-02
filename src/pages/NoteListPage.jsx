@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import { getActiveNotes, deleteNote, archiveNote } from '../utils/network-data';
 import { FiPlus } from 'react-icons/fi';
 
-function NoteListPage() { // <--- AWAL FUNGSI UTAMA
+function NoteListPage() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = React.useState(searchParams.get('keyword') || '');
@@ -25,23 +24,28 @@ function NoteListPage() { // <--- AWAL FUNGSI UTAMA
     };
 
     fetchActiveNotes();
-  }, []);
+  }, []); // ✅ Jangan lupa array dependency
 
-  // Pastikan fungsi-fungsi ini ada di dalam NoteListPage
   const handleDelete = async (id) => {
-    setLoading(true);
-    const { error } = await deleteNote(id);
-    if (!error) {
+    setLoading(true); // Menandakan proses dimulai
+    const { error: deleteError } = await deleteNote(id); // 1. Panggil deleteNote dari network-data.js (atau api.js)
+
+    if (!deleteError) {
+      // 2. Jika berhasil menghapus, ambil kembali daftar catatan terbaru dari API
       const { error: fetchError, data: updatedNotes } = await getActiveNotes();
       if (!fetchError) {
-        setNotes(updatedNotes);
+        setNotes(updatedNotes); // 3. Update state notes dengan data terbaru
       } else {
-        console.error("Gagal mengambil catatan setelah menghapus.");
+        console.error("Gagal mengambil catatan setelah menghapus.", fetchError);
+        alert("Gagal memuat ulang catatan setelah penghapusan.");
+        // Pertimbangkan untuk tidak mengubah state notes jika pengambilan ulang gagal,
+        // atau setidaknya beri tahu pengguna.
       }
     } else {
       alert("Gagal menghapus catatan.");
+      console.error("Error saat menghapus catatan:", deleteError);
     }
-    setLoading(false);
+    setLoading(false); // Menandakan proses selesai
   };
 
   const handleArchive = async (id) => {
@@ -67,15 +71,14 @@ function NoteListPage() { // <--- AWAL FUNGSI UTAMA
   };
 
   const filteredNotes = notes.filter((note) =>
-    // !note.archived && // Mungkin tidak perlu jika getActiveNotes sudah memfilter
     note.title.toLowerCase().includes(keyword.toLowerCase())
   );
 
   if (loading) {
-    return <main><p>Memuat catatan...</p></main>; // Ini harus di dalam fungsi
+    return <main><p>Memuat catatan...</p></main>;
   }
 
-  return ( // Ini juga harus di dalam fungsi
+  return (
     <main>
       <h2>Catatan Aktif</h2>
       <div className="search-bar">
@@ -88,8 +91,8 @@ function NoteListPage() { // <--- AWAL FUNGSI UTAMA
       </div>
       <NoteList
         notes={filteredNotes}
-        onDelete={handleDelete} // Jangan lupa teruskan props ini
-        onArchive={handleArchive} // Jangan lupa teruskan props ini
+        //onDelete={handleDelete}
+        //onArchive={handleArchive}
       />
       <div className="homepage__action">
         <button className="action tooltip" onClick={() => navigate('/notes/new')}>
@@ -99,6 +102,6 @@ function NoteListPage() { // <--- AWAL FUNGSI UTAMA
       </div>
     </main>
   );
-} // <--- AKHIR FUNGSI UTAMA
+}
 
 export default NoteListPage;
